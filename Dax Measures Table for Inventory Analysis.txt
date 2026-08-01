@@ -1,0 +1,19 @@
+Dax Measures Table for Inventory Data Analysis
+
+1. Average Availability Per Day = DIVIDE([Total Availability],[Total Number of Days])
+
+2. Average Demand Per Day = DIVIDE([Total Demand],[Total Number of Days])
+
+3. Average Loss Per Day = DIVIDE([Total Loss],[Total Number of Days])
+
+4. Total Availability = SUM('public inventory_analysis'[availability])
+
+5. Total Demand = SUM('public inventory_analysis'[demand])
+
+6. Total Loss = SUMX(FILTER('public inventory_analysis','public inventory_analysis'[LOSS/PROFIT]<0),'public inventory_analysis'[LOSS/PROFIT]*'public inventory_analysis'[unit_price])*-1
+
+7. Total Number of Days = DISTINCTCOUNT('public inventory_analysis'[order_date])
+
+8. Total Profit = SUMX(FILTER('public inventory_analysis','public inventory_analysis'[LOSS/PROFIT]>0),'public inventory_analysis'[LOSS/PROFIT]*'public inventory_analysis'[unit_price])
+
+9. Total Supply Shortage = [Total Demand]-[Total Availability]
